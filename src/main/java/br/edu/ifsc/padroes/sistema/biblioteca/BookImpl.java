@@ -4,9 +4,13 @@ public class BookImpl implements Book {
     private String title;
     private String description;
 
-    public BookImpl(String title, String description) {
+    private Category category;
+
+
+    public BookImpl(String title, String description, Category category) {
         this.title = title;
         this.description = description;
+        this.category = category;
     }
 
     public String getTitle() {
@@ -15,5 +19,10 @@ public class BookImpl implements Book {
 
     public String getDescription() {
         return description;
+    }
+
+    @Override
+    public Category getCategory() {
+        return category;
     }
 }

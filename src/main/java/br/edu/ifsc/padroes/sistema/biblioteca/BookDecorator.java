@@ -7,11 +7,18 @@ abstract class BookDecorator implements Book {
         this.decoratedBook = decoratedBook;
     }
 
+    @Override
     public String getTitle() {
         return decoratedBook.getTitle();
     }
 
+    @Override
     public String getDescription() {
         return decoratedBook.getDescription();
+    }
+
+    @Override
+    public Category getCategory() {
+        return decoratedBook.getCategory();
     }
 }
