@@ -55,40 +55,40 @@ public class BibliotecaApplication {
                         System.out.println("Categoria inválida!");
                     }
                     break;
-				case 2:
-					if (bookManager.getBooks().isEmpty()) {
-						System.out.println("Nenhum livro cadastrado.");
-					} else {
-						System.out.println("\nLista de livros:");
-						for (int i = 0; i < bookManager.getBooks().size(); i++) {
-							Book book = bookManager.getBooks().get(i);
-							System.out.println(i + ". Título: " + book.getTitle());
-							System.out.println("   Descrição: " + book.getDescription());
-							System.out.println("   Categoria: " + book.getCategory());
-							System.out.println("------------------------");
-						}
+                case 2:
+                    if (bookManager.getBooks().isEmpty()) {
+                        System.out.println("Nenhum livro cadastrado.");
+                    } else {
+                        System.out.println("\nLista de livros:");
+                        for (int i = 0; i < bookManager.getBooks().size(); i++) {
+                            Book book = bookManager.getBooks().get(i);
+                            System.out.println(i + ". Título: " + book.getTitle());
+                            System.out.println("   Descrição: " + book.getDescription());
+                            System.out.println("   Categoria: " + book.getCategory());
+                            System.out.println("------------------------");
+                        }
 
-						System.out.print("Digite o índice do livro a ser removido: ");
-						int removeIndex;
-						if (scanner.hasNextInt()) {
-							removeIndex = scanner.nextInt();
-							scanner.nextLine();
-						} else {
-							System.out.println("Índice inválido!");
-							scanner.nextLine();
-							continue;
-						}
+                        System.out.print("Digite o índice do livro a ser removido: ");
+                        int removeIndex;
+                        if (scanner.hasNextInt()) {
+                            removeIndex = scanner.nextInt();
+                            scanner.nextLine();
+                        } else {
+                            System.out.println("Índice inválido!");
+                            scanner.nextLine();
+                            continue;
+                        }
 
-						if (removeIndex >= 0 && removeIndex < bookManager.getBooks().size()) {
-							Book removeBook = bookManager.getBooks().get(removeIndex);
-							bookManager.removeBook(removeBook);
-							System.out.println("Livro removido com sucesso.");
-						} else {
-							System.out.println("Índice inválido!");
-						}
-					}
-					break;
-				case 3:
+                        if (removeIndex >= 0 && removeIndex < bookManager.getBooks().size()) {
+                            Book removeBook = bookManager.getBooks().get(removeIndex);
+                            bookManager.removeBook(removeBook);
+                            System.out.println("Livro removido com sucesso.");
+                        } else {
+                            System.out.println("Índice inválido!");
+                        }
+                    }
+                    break;
+                case 3:
                     if (bookManager.getBooks().isEmpty()) {
                         System.out.println("Nenhum livro cadastrado.");
                     } else {
@@ -103,31 +103,40 @@ public class BibliotecaApplication {
                     break;
                 case 4:
                     SortStrategy sortStrategy = new TitleSortStrategy();
-                    sortStrategy.sort(bookManager.getBooks());
-                    System.out.println("\nLivros ordenados por título.");
+
+                    if (bookManager.getBooks().isEmpty()) {
+                        System.out.println("Nenhum livro cadastrado.");
+                    } else {
+                        sortStrategy.sort(bookManager.getBooks());
+                        System.out.println("\nLivros ordenados por título.");
+                    }
                     break;
                 case 5:
-                    System.out.println("Categorias disponíveis:");
-                    for (Category category : Category.values()) {
-                        System.out.println(category.ordinal() + ". " + category.name());
-                    }
-                    System.out.print("Digite o número da categoria para ordenar os livros: ");
-                    int categorySortIndex;
-                    if (scanner.hasNextInt()) {
-                        categorySortIndex = scanner.nextInt();
-                        scanner.nextLine();
+                    if (bookManager.getBooks().isEmpty()) {
+                        System.out.println("Nenhum livro cadastrado.");
                     } else {
-                        System.out.println("Categoria inválida!");
-                        scanner.nextLine();
-                        continue;
-                    }
-                    if (categorySortIndex >= 0 && categorySortIndex < Category.values().length) {
-                        Category categorySort = Category.values()[categorySortIndex];
-                        sortStrategy = new CategorySortStrategy(categorySort);
-                        sortStrategy.sort(bookManager.getBooks());
-                        System.out.println("\nLivros ordenados por categoria.");
-                    } else {
-                        System.out.println("Categoria inválida!");
+                        System.out.println("Categorias disponíveis:");
+                        for (Category category : Category.values()) {
+                            System.out.println(category.ordinal() + ". " + category.name());
+                        }
+                        System.out.print("Digite o número da categoria para ordenar os livros: ");
+                        int categorySortIndex;
+                        if (scanner.hasNextInt()) {
+                            categorySortIndex = scanner.nextInt();
+                            scanner.nextLine();
+                        } else {
+                            System.out.println("Categoria inválida!");
+                            scanner.nextLine();
+                            continue;
+                        }
+                        if (categorySortIndex >= 0 && categorySortIndex < Category.values().length) {
+                            Category categorySort = Category.values()[categorySortIndex];
+                            sortStrategy = new CategorySortStrategy(categorySort);
+                            sortStrategy.sort(bookManager.getBooks());
+                            System.out.println("\nLivros ordenados por categoria.");
+                        } else {
+                            System.out.println("Categoria inválida!");
+                        }
                     }
                     break;
                 case 6:
